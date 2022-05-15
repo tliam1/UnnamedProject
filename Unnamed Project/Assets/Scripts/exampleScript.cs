@@ -30,14 +30,14 @@ public class exampleScript : MonoBehaviour
         // WARNING! DO NOT UNCOMMENT THE LINE BELOW AS IT WILL INSTANTIATE LOOP FOREVER!!!!!!
         // anObject = this.gameObject; //this = this script/class the .gameobect extention says: "grab the gameobject this script is attached to"
         // you will see now that you dont need to set onObject in the inspector window
-        
+
         // how assigning a new vector2 value works
         Pos1 = new Vector2(1, 2); //we are giving the vector2 a value of a new vector2.
-        // notice how getting rid of new causes an error. You need it, without it, it thinks you are trying to make a new vector2 variable
-        // this is saying a new vector2 value, not variable
+                                  // notice how getting rid of new causes an error. You need it, without it, it thinks you are trying to make a new vector2 variable
+                                  // this is saying a new vector2 value, not variable
 
 
-        
+
         // Instantiate(anObject, position (vector2 or 3), rotation)
         Instantiate(anObject, Pos1, Quaternion.identity); // anObject is set to "A_Sqaure" (can be seen/changed in the inspector)
         // Instantiate = create
@@ -62,7 +62,7 @@ public class exampleScript : MonoBehaviour
             // anInt = 10 right after the for loop in start
             anInt = returnsInt();
             Debug.Log("After The For Loop, anInt in update is: " + anInt);
-        }else if (anInt == 250)
+        } else if (anInt == 250)
         {
             // anInt = 250 after returnInt() returns a value to it
             anInt += 10;
@@ -88,21 +88,23 @@ public class exampleScript : MonoBehaviour
         // this function does nothing atm. Just runs through emptiness and ends the function
     }
 
-    void physicsLogic(int exampleParameter) 
+    void physicsLogic(int exampleParameter)
     {
         // function made by me (void = the return type) void = nothing so we dont need to return anything
         // if public or private isn't specified it defaults to private. same with variables
     }
 
-    public int returnsInt() 
+    public int returnsInt()
     {
         // this HAS to return an int as specified. not returning anything = an error
         //
         int localInt = 25; // this is a local variable that can only be used in this function
         localInt = (anInt * localInt); // you can use globals inside a function at anytime
-        return localInt; 
+        return localInt;
     }
+    
 
+  
 
 
 } // this ends the class, nothing can be used after this that is wanted to be contained in this class
