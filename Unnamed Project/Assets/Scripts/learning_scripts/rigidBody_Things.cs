@@ -16,7 +16,7 @@ public class rigidBody_Things : MonoBehaviour
     // we can do this in the start function (see below)
 
     public Rigidbody2D rb; // creates an empty rigidbody in the inspector
-                           // do not drag anything into it in the inspector, we will use code today
+    // do not drag anything into it in the inspector, we will use code toda+y
 
     public float constantGravityValue; // THIS WILL BE SET IN THE INSPECTOR
                                        // (Do this last) Look in the increasegravity function to see where this is used 
@@ -72,7 +72,7 @@ public class rigidBody_Things : MonoBehaviour
             // Uncomment the two rb modifiers below:
 
             //notice how velocity is a vector2 as you have an x and y velocity 
-            rb.velocity = new Vector2(0, 0);  // comment this line out when trying drag (down below)
+            //rb.velocity = new Vector2(0, 0);  // comment this line out when trying drag (down below)
             // note: short hand --> rb.velocity = Vector2.zero;
             // but how? shouldn't shorthand be new Vector2.zero?
             // NO! the compiler reads this as Vector2 Vector2.zero (note vector2.zero is short hand for vector2(0,0))
@@ -81,14 +81,15 @@ public class rigidBody_Things : MonoBehaviour
 
 
             // next is drag!
-            // UNCOMMENT THIS LINE--> //rb.drag = 0.5f;
+            // UNCOMMENT THIS LINE-->
+            rb.drag = 0.5f;
             // drag works like normal drag and will slow your rb.velocity vector down over time
             // if you have anymore questions make sure you talk to me
         }
     }
 
 
-    void increaseGravity()
+        void increaseGravity()
     {
         // here we are setting some actual gravity
         // notice how we add an f after 0.1, this specifies that this is a float
@@ -102,4 +103,4 @@ public class rigidBody_Things : MonoBehaviour
         // change constant gravity value in the inspector! not in code!!!
         // Note: negative gravity works here, have fun testing!
     }
-}// this semicollon ends the class! WE ARE DONE! 
+}// this semicolon ends the class! WE ARE DONE! 
