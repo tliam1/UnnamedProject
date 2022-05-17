@@ -35,6 +35,14 @@ public class Heheheha : MonoBehaviour
             transform.position = new Vector3(0, 0, 0);
         }
 
+        if (!canJump)
+        {
+            beeb.gravityScale = Mathf.Lerp(beeb.gravityScale, 5, Time.deltaTime * 1); //decrease multiplier to increase gravity slower
+
+        }else if (canJump && beeb.gravityScale != 0)
+        {
+            beeb.gravityScale = 0;
+        }
 
         //this creates a ray that detects if it touches a layer that groundLayer is assigned to in the inspector
         //this will probably be something like "ground", I can show you how to do this when you see it tomorrow
