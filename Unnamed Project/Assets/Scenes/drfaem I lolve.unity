@@ -130,6 +130,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3995704692986598856, guid: 799f18d0b29475041b7172de4dc6eeac, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995704692986598856, guid: 799f18d0b29475041b7172de4dc6eeac, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995704692986598856, guid: 799f18d0b29475041b7172de4dc6eeac, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 343351455
+      objectReference: {fileID: 0}
     - target: {fileID: 3995704692986598857, guid: 799f18d0b29475041b7172de4dc6eeac, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -177,6 +189,14 @@ PrefabInstance:
     - target: {fileID: 3995704692986598863, guid: 799f18d0b29475041b7172de4dc6eeac, type: 3}
       propertyPath: m_Name
       value: i lOVE DREAm
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995704692986598868, guid: 799f18d0b29475041b7172de4dc6eeac, type: 3}
+      propertyPath: rayDistance
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995704692986598868, guid: 799f18d0b29475041b7172de4dc6eeac, type: 3}
+      propertyPath: bales.Array.size
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 799f18d0b29475041b7172de4dc6eeac, type: 3}
