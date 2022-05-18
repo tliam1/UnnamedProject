@@ -192,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3995704692986598868, guid: 799f18d0b29475041b7172de4dc6eeac, type: 3}
       propertyPath: rayDistance
-      value: 0.55
+      value: 0.52
       objectReference: {fileID: 0}
     - target: {fileID: 3995704692986598868, guid: 799f18d0b29475041b7172de4dc6eeac, type: 3}
       propertyPath: bales.Array.size

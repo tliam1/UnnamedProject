@@ -28,8 +28,8 @@ public class Heheheha : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        canJump = Physics2D.Raycast(transform.position, Vector2.down, rayDistance, groundLayer);
-
+        canJump = Physics2D.Raycast(new Vector2(transform.position.x - 0.38f, transform.position.y - rayDistance), Vector2.right, 0.88f, groundLayer);
+        Debug.Log(canJump);
         if (transform.position.y <= -5.4f)
         { 
             transform.position = new Vector3(0, 0, 0);
@@ -38,8 +38,9 @@ public class Heheheha : MonoBehaviour
         if (!canJump)
         {
             beeb.gravityScale = Mathf.Lerp(beeb.gravityScale, 5, Time.deltaTime * 1); //decrease multiplier to increase gravity slower
+        }
 
-        }else if (canJump && beeb.gravityScale != 0)
+        else if (canJump && beeb.gravityScale != 0)
         {
             beeb.gravityScale = 0;
         }
@@ -80,12 +81,12 @@ public class Heheheha : MonoBehaviour
         //I want the line to be red
         Gizmos.color = Color.red;
         //only scene is scene window, not game window
-        Gizmos.DrawLine(transform.position, (Vector2)transform.position + (Vector2.down * rayDistance));
+        Gizmos.DrawLine(new Vector2(transform.position.x - 0.38f, transform.position.y) + (Vector2.down) * rayDistance, new Vector2(transform.position.x + 0.51f, transform.position.y) + (Vector2.down) * rayDistance);
         //this draws a line in the scene window in unity
         //Gizmos.DrawLine(start, end)
         //I used (vector2)*transform.position as we cant add a vector3 with a vector2
         //using (vector2) before transform.position, we specify we only want the (x,y) of transform.position
-        
+
     }
 
 }
