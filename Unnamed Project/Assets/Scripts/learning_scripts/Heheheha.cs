@@ -28,7 +28,6 @@ public class Heheheha : MonoBehaviour
     {
         jumpForce = new Vector2(0, 1);
         bales[5] = 2;
-        StartCoroutine(waitForTime(5));
         canDash = true;
         isDashing = false;
 
@@ -88,25 +87,16 @@ public class Heheheha : MonoBehaviour
             applyDash();
         } 
 
-        if(canDash)
-            beeb.velocity = (new Vector2(Input.GetAxis("Horizontal") * 5, beeb.velocity.y));
+        if(!isDashing)
+            beeb.velocity = (new Vector2(Input.GetAxis("Horizontal") * 7, beeb.velocity.y));
 
     }
-
-    public IEnumerator waitForTime(float time)
-    {
-        yield return new WaitForSeconds(time);
-        Debug.Log("This time has passed: " + time);
-
-    }
-
-
-
 
     public void applyDash()
     {
         Debug.Log("RAN");
-        beeb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * 2, 0), ForceMode2D.Impulse); //Raw just means movement is just 0 or 1, no value inbetween
+        beeb.velocity = new Vector2(0, 0);
+        beeb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * 2, Input.GetAxisRaw("Vertical") * 2), ForceMode2D.Impulse); //Raw just means movement is just 0 or 1, no value inbetween
         canDash = false;
         isDashing = true;
         dashCoolDownTimer.Run();
