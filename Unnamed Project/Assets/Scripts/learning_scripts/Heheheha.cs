@@ -17,6 +17,9 @@ public class Heheheha : MonoBehaviour
     public float rayDistance; // set in inspector
     public bool canJump = false;
 
+    [Header("DashChecking")]
+    public bool canDash = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +32,7 @@ public class Heheheha : MonoBehaviour
     void Update()
     {
         canJump = Physics2D.Raycast(new Vector2(transform.position.x - 0.38f, transform.position.y - rayDistance), Vector2.right, 0.88f, groundLayer);
-        Debug.Log(canJump);
+        //Debug.Log(canJump);
         if (transform.position.y <= -5.4f)
         { 
             transform.position = new Vector3(0, 0, 0);
@@ -45,6 +48,7 @@ public class Heheheha : MonoBehaviour
             beeb.gravityScale = 0;
         }
 
+
         //this creates a ray that detects if it touches a layer that groundLayer is assigned to in the inspector
         //this will probably be something like "ground", I can show you how to do this when you see it tomorrow
         //Physics2D.Raycast(start_of_ray, direction_of_ray, distance_of_ray, layerToCheck)
@@ -54,16 +58,23 @@ public class Heheheha : MonoBehaviour
 
     public void FixedUpdate()
     {
+
         if (Input.GetKey(KeyCode.Space) && canJump)
         {
             //we want to stop all y-forces before a jump to get consistant jumping
             beeb.velocity = new Vector2(beeb.velocity.x, 0);
+            Debug.Log("Key");
             //setting beeb.velocity.y = 0 gets an annoying error
             //unity doesnt allow changing of a specific variable that way, you need to do it as above
             // ... as far as I know
 
-            beeb.AddForce(jumpForce * 8f);
+            beeb.AddForce(jumpForce, ForceMode2D.Impulse);
         }
+
+        if (Input.GetKey(KeyCode.LeftShift) && canDash)
+        {
+            applyDash();
+        } 
 
         beeb.velocity = (new Vector2(Input.GetAxis("Horizontal") * 5, beeb.velocity.y));
 
@@ -75,6 +86,26 @@ public class Heheheha : MonoBehaviour
         Debug.Log("This time has passed: " + time);
 
     }
+
+
+
+
+    public void applyDash()
+    {
+        beeb.AddForce(new Vector2(Input.GetAxis("Horizontal") * 5, 0), ForceMode2D.Impulse);
+        canDash = false;
+    }
+
+
+
+    IEnumerator dashCoolDown(float coolDownTime)
+    {
+        yield return new WaitForSeconds(coolDownTime);
+
+    }
+
+
+
 
     private void OnDrawGizmos()
     {
