@@ -23,7 +23,7 @@ public class Heheheha : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        jumpForce = new Vector2(0, 5);
+        jumpForce = new Vector2(0, 1);
         bales[5] = 2;
         StartCoroutine(waitForTime(5));
     }
