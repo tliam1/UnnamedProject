@@ -27,7 +27,7 @@ public class Heheheha : MonoBehaviour
 
     [Header("Movement Mods")]
     public float horizontalMovementModifier = 1;
-
+    public float heldGravity = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,8 +41,11 @@ public class Heheheha : MonoBehaviour
         dashCoolDownTimer.AddTimerFinishedListener(() => //sets end condition of the timer (Triggers a unity event, with isDashing being the even contents)
         {
             isDashing = false;
-            if (!canJump)
-                beeb.gravityScale = 5f;
+            /* if (!canJump)
+                 beeb.gravityScale = 5f;
+            */
+            beeb.gravityScale = heldGravity;
+            heldGravity = 0;
         });
     }
 
@@ -62,6 +65,8 @@ public class Heheheha : MonoBehaviour
         }else if ((canJump && beeb.gravityScale != 0) || isDashing)
         {
             beeb.gravityScale = 0;
+            if (isDashing)
+                heldGravity = Mathf.Lerp(heldGravity, 5, Time.deltaTime * 1);
         }
 
         if (canJump && !canDash && !isDashing)
