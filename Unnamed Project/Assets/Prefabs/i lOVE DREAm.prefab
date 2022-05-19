@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3995704692986598868}
   - component: {fileID: 3995704692986598856}
   - component: {fileID: 3995704692986598858}
-  - component: {fileID: 3995704692986598859}
+  - component: {fileID: 976711473}
   m_Layer: 0
   m_Name: i lOVE DREAm
   m_TagString: Untagged
@@ -47,15 +47,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735549ed5b73eb0488e8e2ecd83ac505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Location: {fileID: 0}
-  Movement: {x: 0, y: 5}
+  jumpForce: {x: 0, y: 0}
   beeb: {fileID: 3995704692986598858}
   jumpTime: 0
+  bales: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  rayDistance: 0.72
+  rayDistance: 0.5074122
   canJump: 0
+  canDash: 1
+  isDashing: 0
+  dashCoolDownTime: 0.5
 --- !u!212 &3995704692986598856
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -127,10 +130,10 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!60 &3995704692986598859
-PolygonCollider2D:
+--- !u!61 &976711473
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -138,11 +141,11 @@ PolygonCollider2D:
   m_GameObject: {fileID: 3995704692986598863}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 214682b441a74a249bbed1de62c5b585, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0043796897, y: -0.07550825}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -152,22 +155,6 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.244119, y: 0.26041943}
-      - {x: 0.20933257, y: 0.28564736}
-      - {x: 0.11112649, y: 0.3273453}
-      - {x: -0.007595975, y: 0.3405885}
-      - {x: -0.1562441, y: 0.30283177}
-      - {x: -0.2636446, y: 0.23539105}
-      - {x: -0.34646508, y: 0.13610719}
-      - {x: -0.37051615, y: -0.006218029}
-      - {x: -0.35558417, y: -0.15635955}
-      - {x: -0.3000624, y: -0.25868848}
-      - {x: -0.20495775, y: -0.30885732}
-      - {x: -0.2724742, y: -0.4731029}
-      - {x: 0.36132148, y: -0.47292835}
-      - {x: 0.33181763, y: -0.18234788}
-      - {x: 0.35828185, y: -0.122885026}
-      - {x: 0.35520136, y: 0.07656259}
-      - {x: 0.3006826, y: 0.2025699}
+  serializedVersion: 2
+  m_Size: {x: 0.69900906, y: 0.7683555}
+  m_EdgeRadius: 0

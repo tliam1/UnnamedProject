@@ -18,7 +18,10 @@ public class Heheheha : MonoBehaviour
     public bool canJump = false;
 
     [Header("DashChecking")]
-    public bool canDash = false;
+    public bool canDash = true;
+    public bool isDashing;
+    Timer dashCoolDownTimer;
+    public float dashCoolDownTime;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +29,17 @@ public class Heheheha : MonoBehaviour
         jumpForce = new Vector2(0, 1);
         bales[5] = 2;
         StartCoroutine(waitForTime(5));
+        canDash = true;
+        isDashing = false;
+
+        dashCoolDownTimer = gameObject.AddComponent<Timer>(); //creates and adds timer component at run time
+        dashCoolDownTimer.Duration = dashCoolDownTime; //sets duration
+        dashCoolDownTimer.AddTimerFinishedListener(() => //sets end condition of the timer (Triggers a unity event, with isDashing being the even contents)
+        {
+            isDashing = false;
+            if (!canJump)
+                beeb.gravityScale = 5f;
+        });
     }
 
     // Update is called once per frame
@@ -38,17 +52,16 @@ public class Heheheha : MonoBehaviour
             transform.position = new Vector3(0, 0, 0);
         }
 
-        if (!canJump)
+        if (!canJump && !isDashing)
         {
             beeb.gravityScale = Mathf.Lerp(beeb.gravityScale, 5, Time.deltaTime * 1); //decrease multiplier to increase gravity slower
-        }
-
-        else if (canJump && beeb.gravityScale != 0)
+        }else if ((canJump && beeb.gravityScale != 0) || isDashing)
         {
             beeb.gravityScale = 0;
         }
 
-
+        if (canJump && !canDash && !isDashing)
+            canDash = true;
         //this creates a ray that detects if it touches a layer that groundLayer is assigned to in the inspector
         //this will probably be something like "ground", I can show you how to do this when you see it tomorrow
         //Physics2D.Raycast(start_of_ray, direction_of_ray, distance_of_ray, layerToCheck)
@@ -63,7 +76,6 @@ public class Heheheha : MonoBehaviour
         {
             //we want to stop all y-forces before a jump to get consistant jumping
             beeb.velocity = new Vector2(beeb.velocity.x, 0);
-            Debug.Log("Key");
             //setting beeb.velocity.y = 0 gets an annoying error
             //unity doesnt allow changing of a specific variable that way, you need to do it as above
             // ... as far as I know
@@ -71,12 +83,13 @@ public class Heheheha : MonoBehaviour
             beeb.AddForce(jumpForce, ForceMode2D.Impulse);
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) && canDash)
+        if (Input.GetKey(KeyCode.LeftShift) && canDash && !isDashing)
         {
             applyDash();
         } 
 
-        beeb.velocity = (new Vector2(Input.GetAxis("Horizontal") * 5, beeb.velocity.y));
+        if(canDash)
+            beeb.velocity = (new Vector2(Input.GetAxis("Horizontal") * 5, beeb.velocity.y));
 
     }
 
@@ -92,19 +105,14 @@ public class Heheheha : MonoBehaviour
 
     public void applyDash()
     {
-        beeb.AddForce(new Vector2(Input.GetAxis("Horizontal") * 5, 0), ForceMode2D.Impulse);
+        Debug.Log("RAN");
+        beeb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * 2, 0), ForceMode2D.Impulse); //Raw just means movement is just 0 or 1, no value inbetween
         canDash = false;
+        isDashing = true;
+        dashCoolDownTimer.Run();
+        //to check if it is running at anytime do:
+        // dashCoolDownTimer.Running (NOT USED LIKE A FUNCTION RUNNING IS A BOOL THAT IS TRUE WHEN TIMER IS RUNNING OR FALSE WHEN NOT RUNNING)
     }
-
-
-
-    IEnumerator dashCoolDown(float coolDownTime)
-    {
-        yield return new WaitForSeconds(coolDownTime);
-
-    }
-
-
 
 
     private void OnDrawGizmos()
