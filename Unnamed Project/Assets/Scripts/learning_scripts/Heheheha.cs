@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Heheheha : MonoBehaviour
 {
-    public Vector2 jumpForce;
 
     public Rigidbody2D beeb;
 
-    public float jumpTime;
+    [Header ("random Tests")]
+    public int[] bales;
 
-    public int [] bales;
+    [Header ("Jumping")]
+    public Vector2 jumpForce;
+    public float jumpTime;
 
     [Header("GroundChecking")] //this header helps organize the inspector
     public LayerMask groundLayer; // set in inspector
@@ -18,10 +20,13 @@ public class Heheheha : MonoBehaviour
     public bool canJump = false;
 
     [Header("DashChecking")]
-    public bool canDash = true;
+    public bool canDash;
     public bool isDashing;
     Timer dashCoolDownTimer;
-    public float dashCoolDownTime;
+    public float dashCoolDownTime; //inspector
+
+    [Header("Movement Mods")]
+    public float horizontalMovementModifier = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -85,10 +90,18 @@ public class Heheheha : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && canDash && !isDashing)
         {
             applyDash();
-        } 
+        }
 
-        if(!isDashing)
-            beeb.velocity = (new Vector2(Input.GetAxis("Horizontal") * 7, beeb.velocity.y));
+        if (!isDashing)
+        {
+            beeb.velocity = (new Vector2(Input.GetAxis("Horizontal") * 7 * horizontalMovementModifier, beeb.velocity.y));
+            horizontalMovementModifier = Mathf.Lerp(horizontalMovementModifier, 1, Time.deltaTime);
+        }
+        else
+        {
+            horizontalMovementModifier = 1.5f;
+        }
+
 
     }
 
