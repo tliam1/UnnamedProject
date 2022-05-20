@@ -117,7 +117,7 @@ public class Heheheha : MonoBehaviour
 
         //if horizontal and vertical is being pressed then we want to half both as we want to cap the max movement at 1 
         //(Horizontal when pressed is -1 or 1) with both pressed you get twice the distance
-        //halfing it when both are pressed keeps the distance consistance
+        //@TODO halfing it when both are pressed keeps the distance consistance
         beeb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * 2, Input.GetAxisRaw("Vertical") * 2), ForceMode2D.Impulse); //Raw just means movement is just 0 or 1, no value inbetween
         canDash = false;
         isDashing = true;
