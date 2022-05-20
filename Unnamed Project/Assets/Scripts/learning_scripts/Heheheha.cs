@@ -69,7 +69,7 @@ public class Heheheha : MonoBehaviour
                 heldGravity = Mathf.Lerp(heldGravity, 5, Time.deltaTime * 1);
         }
 
-        if (canJump && !canDash && !isDashing)
+        if (canJump && !canDash)
             canDash = true;
         //this creates a ray that detects if it touches a layer that groundLayer is assigned to in the inspector
         //this will probably be something like "ground", I can show you how to do this when you see it tomorrow
@@ -114,6 +114,10 @@ public class Heheheha : MonoBehaviour
     {
         Debug.Log("RAN");
         beeb.velocity = new Vector2(0, 0);
+
+        //if horizontal and vertical is being pressed then we want to half both as we want to cap the max movement at 1 
+        //(Horizontal when pressed is -1 or 1) with both pressed you get twice the distance
+        //halfing it when both are pressed keeps the distance consistance
         beeb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * 2, Input.GetAxisRaw("Vertical") * 2), ForceMode2D.Impulse); //Raw just means movement is just 0 or 1, no value inbetween
         canDash = false;
         isDashing = true;
