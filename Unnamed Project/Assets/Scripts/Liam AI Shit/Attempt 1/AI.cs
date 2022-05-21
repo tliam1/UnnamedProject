@@ -59,6 +59,12 @@ public class AI : MonoBehaviour
                     //distanceVector = target.transform.position - transform.position;
                     //rayCasts[j].assignNewWeight((Vector2.Dot(distanceVector.normalized, rayCasts[j].getDir().normalized) + 1) / 2);
                     //rayCasts[j].setRayHit(Physics2D.Raycast(transform.position, rayDirections[j], rayCasts[j].getWeight(), aiObstacle));
+                    if (!rayCasts[j].getRay() && rayCasts[j].getWeight() > desiredPath.z && desiredPath == Vector3.zero)
+                    {
+                        desiredPath = new Vector3(rayCasts[j].getDir().x, rayCasts[j].getDir().y, rayCasts[j].getWeight());
+                        continue;
+                    }
+
                     if (!rayCasts[j].getRay() && rayCasts[j].getWeight() > desiredPath.z 
                         && Vector2.Distance(rayCasts[j].getDir().normalized, rb.velocity.normalized) < Vector2.Distance(desiredPath.normalized, rb.velocity.normalized)) //I am using the Z to store the weight value, pretty dumb but sorta smart
                     {
@@ -110,7 +116,7 @@ public class AI : MonoBehaviour
         // start moving toward the target with the desired path
         if (rb.velocity != (Vector2)desiredPath)
         {
-            rb.velocity = desiredPath * 3;
+            rb.velocity = Vector2.Lerp(rb.velocity,desiredPath * 3, Time.deltaTime * 5);
             desiredPath = new Vector3(desiredPath.x, desiredPath.y, 0);  //removing z component
         }
 

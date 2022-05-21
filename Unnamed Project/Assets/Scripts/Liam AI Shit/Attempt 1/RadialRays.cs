@@ -10,7 +10,6 @@ public class RadialRays
     public Vector2 rayDir;
     public bool hitObstacle;
 
-    public float currentMods = 0;
     public RadialRays(RaycastHit2D newRay, Vector2 newDir)
     {
         ray = newRay;
