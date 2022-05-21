@@ -8,6 +8,7 @@ public class RadialRays
     public float rayWeight;
     private RaycastHit2D ray; // cannot be changed once class is created
     public Vector2 rayDir;
+    public bool hitObstacle;
     public RadialRays(RaycastHit2D newRay, Vector2 newDir)
     {
         ray = newRay;
@@ -33,5 +34,11 @@ public class RadialRays
     public void assignNewWeight(float newWeight)
     {
         rayWeight = newWeight;
+    }
+
+    public bool getRay()
+    {
+        hitObstacle = ray;
+        return hitObstacle;
     }
 }
