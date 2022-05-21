@@ -41,7 +41,7 @@ public class AI : MonoBehaviour
         {
             Debug.Log(target.transform.position.normalized + "\t" + rayCasts[i].getDir().normalized);
             Vector2 distanceVector = target.transform.position - transform.position;
-            rayCasts[i].assignNewWeight(Vector2.Dot(distanceVector.normalized, rayCasts[i].getDir().normalized));
+            rayCasts[i].assignNewWeight((Vector2.Dot(distanceVector.normalized, rayCasts[i].getDir().normalized) + 1) /2);
             rayCasts[i].setRayHit(Physics2D.Raycast(transform.position, rayDirections[i], rayCasts[i].getWeight(), aiObstacle));
             if (rayCasts[i].getWeight() > desiredPath.z) //I am using the Z to store the weight value, pretty dumb but sorta smart
             {
@@ -53,7 +53,7 @@ public class AI : MonoBehaviour
 
         // start moving toward the target with the desired path
         if (rb.velocity != (Vector2)desiredPath)
-            rb.velocity = desiredPath * 5;
+            rb.velocity = desiredPath * 3;
     }
 
     private void OnDrawGizmos()
