@@ -28,8 +28,17 @@ public class AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //feels very robotic, but works for now. Fix later (LERP!)
+        if (Vector2.Distance(target.transform.position, transform.position) >= 1)
+            NormalPathFinding();
+        else if (rb.velocity != Vector2.zero)
+            rb.velocity = Vector2.zero;
+    }
+
+    void NormalPathFinding()
+    {
         for (int i = 0; i < rayCasts.Length; i++)
-        {  
+        {
             Debug.Log(target.transform.position.normalized + "\t" + rayCasts[i].getDir().normalized);
             Vector2 distanceVector = target.transform.position - transform.position;
             rayCasts[i].assignNewWeight(Vector2.Dot(distanceVector.normalized, rayCasts[i].getDir().normalized));
@@ -43,8 +52,8 @@ public class AI : MonoBehaviour
         desiredPath = new Vector3(desiredPath.x, desiredPath.y, 0); //removing z component
 
         // start moving toward the target with the desired path
-        rb.velocity = desiredPath;
-
+        if (rb.velocity != (Vector2)desiredPath)
+            rb.velocity = desiredPath * 5;
     }
 
     private void OnDrawGizmos()
