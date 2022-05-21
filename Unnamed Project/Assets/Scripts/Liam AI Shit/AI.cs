@@ -80,7 +80,7 @@ public class AI : MonoBehaviour
             if (collisionCount > 0)
                 continue;
 
-            desiredPath = new Vector3(desiredPath.x, desiredPath.y, 0);  //removing z component
+
             //this if statement is bad, needs a better condition that runs once until new path is needed
             if (rayCasts[i].getWeight() > desiredPath.z) //I am using the Z to store the weight value, pretty dumb but sorta smart
             {
@@ -98,6 +98,7 @@ public class AI : MonoBehaviour
         if (rb.velocity != (Vector2)desiredPath)
         {
             rb.velocity = desiredPath * 3;
+            desiredPath = new Vector3(desiredPath.x, desiredPath.y, 0);  //removing z component
         }
 
     }
