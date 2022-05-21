@@ -48,6 +48,7 @@ public class AI : MonoBehaviour
             rayCasts[i].assignNewWeight((Vector2.Dot(distanceVector.normalized, rayCasts[i].getDir().normalized) + 1) /2);
             rayCasts[i].setRayHit(Physics2D.Raycast(transform.position, rayDirections[i], rayCasts[i].getWeight(), aiObstacle));
 
+            //change to see if the one with the highest priority changes
             if (rayCasts[i].getRay() != previousRaycast)
             {
                 //we need to update our pathfinding 
@@ -80,14 +81,26 @@ public class AI : MonoBehaviour
             if (collisionCount > 0)
                 continue;
 
-
+            float velocityWeight = 10;
+            int bestIndex = -1;
+            for (int j = 0; j < rayCasts.Length; j++)
+            {
+                float tempWeight = Vector2.Distance(rayCasts[j].getDir().normalized, distanceVector.normalized);
+                if(tempWeight < velocityWeight)
+                {
+                    velocityWeight = tempWeight;
+                    bestIndex = j;
+                }
+            }
             //this if statement is bad, needs a better condition that runs once until new path is needed
-            if (rayCasts[i].getWeight() > desiredPath.z) //I am using the Z to store the weight value, pretty dumb but sorta smart
+            /*if (rayCasts[i].getWeight() > desiredPath.z) //I am using the Z to store the weight value, pretty dumb but sorta smart
             {
                 //this will be used to update navmesh Direction
                 Debug.Log("new Open Path: " + rayCasts[i].getDir() + "\t" + "old desired path: " + desiredPath);
                 desiredPath = new Vector3(rayCasts[i].getDir().x, rayCasts[i].getDir().y, rayCasts[i].getWeight());
             }
+            */
+            desiredPath = rayCasts[bestIndex].getDir();
 
             //Debug.Log(rayCasts[i].getWeight());
         }

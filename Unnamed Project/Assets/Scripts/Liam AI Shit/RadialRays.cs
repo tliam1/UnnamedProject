@@ -9,6 +9,8 @@ public class RadialRays
     private RaycastHit2D ray; // cannot be changed once class is created
     public Vector2 rayDir;
     public bool hitObstacle;
+
+    public float currentMods = 0;
     public RadialRays(RaycastHit2D newRay, Vector2 newDir)
     {
         ray = newRay;
